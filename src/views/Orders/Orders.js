@@ -16,6 +16,7 @@ class Orders extends Component {
 
         this.state = {
             cart: [],
+            success: false,
         };
     }
 
@@ -34,9 +35,8 @@ class Orders extends Component {
     }
 
     submitClickHandler = () => {
-        let self = this;
+        this.setState({success: true});
         axios.post('http://localhost:4000/snackbar/submitOrder').then(function(response){
-            console.log(response);
 
         }).catch(function(error){
             //Some error occurred
@@ -55,6 +55,11 @@ class Orders extends Component {
 
     
     render() {
+
+        let showMessage= '';
+        if(this.state.success) {
+            showMessage = (<button type="button" className="btn btn-success">Order has been placed successfully.</button>);
+        }
 
         const cart = [];
         for (let i = 0; i < this.state.cart.length; i++) {
@@ -107,6 +112,14 @@ class Orders extends Component {
                             </div>
                             <div className="card-footer">
                                 <button type="submit" onClick={this.submitClickHandler} className="btn btn-sm btn-primary">Submit Order</button>{' '}
+                            </div>
+                            <div className="row">
+                                &nbsp;
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-5">
+                                    {showMessage}
+                                </div>
                             </div>
 
                         </div>
