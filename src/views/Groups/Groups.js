@@ -18,7 +18,7 @@ class Groups extends Component {
 
     componentWillMount = () => {
         let self = this;
-        axios.post('http://10.155.209.58:4000/snackbar/getusers').then(function(response){
+        axios.post('http://localhost:4000/snackbar/getusers').then(function(response){
             let teamMembers = [];
             response.data.users.forEach((user) => {
                 teamMembers.push({userID: user.UserID, name: user.Name});
