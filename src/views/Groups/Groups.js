@@ -37,7 +37,7 @@ class Groups extends Component {
 
     handleRemoveUser = (name,id) => {
         let self = this;
-        axios.post('http://10.155.209.58:4000/snackbar/deleteuser',{userId: id}).then(function(response){
+        axios.post('http://localhost:4000/snackbar/deleteuser',{userId: id}).then(function(response){
             window.location.reload();
         }).catch(function(error){
             //Some error occurred
@@ -48,7 +48,7 @@ class Groups extends Component {
 
     addUserHandler = (user) => {
         let self = this;
-        axios.post('http://10.155.209.58:4000/snackbar/adduser',user).then(function(response){
+        axios.post('http://localhost:4000/snackbar/adduser',user).then(function(response){
             self.togglePrimary();
             window.location.reload();
         }).catch(function(error){

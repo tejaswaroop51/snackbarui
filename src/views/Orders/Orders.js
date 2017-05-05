@@ -35,7 +35,7 @@ class Orders extends Component {
 
     submitClickHandler = () => {
         let self = this;
-        axios.post('http://10.155.209.58:4000/snackbar/submitOrder').then(function(response){
+        axios.post('http://localhost:4000/snackbar/submitOrder').then(function(response){
             console.log(response);
 
         }).catch(function(error){
@@ -45,7 +45,7 @@ class Orders extends Component {
 
     quantityUpdate = (product) => {
         let self = this;
-        axios.post('http://10.155.209.58:4000/snackbar/updateQuantity',product).then(function(response){
+        axios.post('http://localhost:4000/snackbar/updateQuantity',product).then(function(response){
             console.log(response);
 
         }).catch(function(error){

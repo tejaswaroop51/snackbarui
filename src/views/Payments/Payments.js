@@ -31,7 +31,7 @@ class Orders extends Component {
     submitClickHandler = () => {
         let self = this;
         let amount = document.getElementById("amount").value;
-        axios.post('http://10.155.209.58:4000/snackbar/addPayment',{amount: amount, isRecurring: 0, frequency: 0}).then(function(response){
+        axios.post('http://localhost:4000/snackbar/addPayment',{amount: amount, isRecurring: 0, frequency: 0}).then(function(response){
             document.getElementById("amount").value = '';
             self.setState({success: true});
 
@@ -44,7 +44,7 @@ class Orders extends Component {
         let self = this;
         let amount = document.getElementById("freqAmount").value;
         let frequency = document.getElementById("frequency").value;
-        axios.post('http://10.155.209.58:4000/snackbar/addPayment',{amount: amount, isRecurring: 1, frequency: frequency}).then(function(response){
+        axios.post('http://localhost:4000/snackbar/addPayment',{amount: amount, isRecurring: 1, frequency: frequency}).then(function(response){
             document.getElementById("freqAmount").value = '';
             document.getElementById("frequency").value='';
             self.setState({freqSuccess: true});
