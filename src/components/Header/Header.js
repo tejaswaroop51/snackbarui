@@ -43,34 +43,15 @@ class Header extends Component {
     return (
       <header className="app-header navbar">
         <button className="navbar-toggler mobile-sidebar-toggler d-lg-none" onClick={this.mobileSidebarToggle} type="button">&#9776;</button>
-        <a className="navbar-brand" href="#"></a>
+        <div style={{color: "block", paddingLeft: "20px", fontWeight: "bold", fontSize: "40px"}}>SnackBar</div>
         <ul className="nav navbar-nav d-md-down-none">
           <li className="nav-item">
             <a className="nav-link navbar-toggler sidebar-toggler" onClick={this.sidebarToggle} href="#">&#9776;</a>
           </li>
-          <li className="nav-item px-3">
-            <a className="nav-link" href="#">Dashboard</a>
-          </li>
-          <li className="nav-item px-3">
-            <a className="nav-link" href="#">Users</a>
-          </li>
-          <li className="nav-item px-3">
-            <a className="nav-link" href="#">Settings</a>
-          </li>
+
         </ul>
         <ul className="nav navbar-nav ml-auto">
-          <li className="nav-item d-md-down-none">
-            <a className="nav-link" href="#"><i className="icon-bell"></i><span className="badge badge-pill badge-danger">5</span></a>
-          </li>
-          <li className="nav-item d-md-down-none">
-            <a className="nav-link" href="#"><i className="icon-list"></i></a>
-          </li>
-          <li className="nav-item d-md-down-none">
-            <a className="nav-link" href="#"><i className="icon-location-pin"></i></a>
-          </li>
-          <li className="nav-item">
-           
-          </li>
+
           <li className="nav-item d-md-down-none">
             <a className="nav-link navbar-toggler aside-menu-toggler" onClick={this.asideToggle} href="#">&#9776;</a>
           </li>
