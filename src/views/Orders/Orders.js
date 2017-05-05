@@ -21,7 +21,7 @@ class Orders extends Component {
 
     componentWillMount = () => {
         let self = this;
-        axios.post('http://10.155.209.58:4000/snackbar/cartinfo').then(function(response){
+        axios.post('http://localhost:4000/snackbar/cartinfo').then(function(response){
             let cart = [];
             response.data.cartInfo.forEach((product) => {
                 cart.push({productId: product.ProductId, name: product.Name , quantity: product.Quantity});
