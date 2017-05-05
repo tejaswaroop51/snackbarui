@@ -6,6 +6,7 @@ import Full from './containers/Full/'
 import Simple from './containers/Simple/'
 
 import Charts from './views/Charts/'
+import Groups from './views/Groups/'
 import Dashboard from './views/Dashboard/'
 import Buttons from './views/Components/Buttons/'
 import Cards from './views/Components/Cards/'
@@ -46,6 +47,7 @@ export default (
       </Route>
       <Route path="widgets" name="Widgets" component={Widgets}/>
       <Route path="charts" name="Charts" component={Charts}/>
+      <Route path="groups" name="Groups" component={Groups}/>
     </Route>
     <Route path="pages/" name="Pages" component={Simple}>
       <IndexRoute component={Page404}/>
