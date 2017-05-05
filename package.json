@@ -1,7 +1,7 @@
 {
-  "name": "coreui-react",
+  "name": "snackbarui",
   "version": "1.0.0-alpha.5",
-  "private": true,
+  "private": false,
   "homepage": ".",
   "devDependencies": {
     "gulp": "^3.9.1",
