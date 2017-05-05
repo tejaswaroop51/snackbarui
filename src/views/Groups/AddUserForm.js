@@ -4,7 +4,17 @@ class AddUserForm extends Component {
 
     submitClickHandler = () => {
         let name = document.getElementById("hf-name").value;
-        this.props.onAddUser(name);
+        let email = document.getElementById("hf-email").value;
+        let paypalEmail = document.getElementById("hf-paypal-email").value;
+        let phone = document.getElementById("hf-phone").value;
+        let isInCharge = document.getElementById("radio1").value;
+        let user = {};
+        user.name = name;
+        user.paypalInfo = paypalEmail;
+        user.email = email;
+        user.phone = phone;
+        user.isInCharge = isInCharge
+        this.props.onAddUser(user);
     }
 
     render() {
@@ -38,6 +48,19 @@ class AddUserForm extends Component {
                             <div className="col-md-9">
                                 <input type="number" id="hf-phone" name="hf-phone" className="form-control" placeholder="Enter Phone Number.."/>
                                 <span className="help-block">Please enter your phone number</span>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label className="col-md-3 form-control-label" htmlFor="hf-Phone-Number">Is Incharge:</label>
+                            <div className="col-md-9">
+                                <div className="radio">
+                                    <label htmlFor="radio1">
+                                        <input type="radio" id="radio1" name="radios" value="1"/>&nbsp;Yes
+                                    </label> &nbsp;
+                                    <label htmlFor="radio2">
+                                        <input type="radio" id="radio1" name="radios" value="0"/>&nbsp;No
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </form>

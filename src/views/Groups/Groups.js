@@ -18,10 +18,10 @@ class Groups extends Component {
 
     componentWillMount = () => {
         let self = this;
-        axios.post('http://10.155.209.58:3000/snackbar/getusers').then(function(response){
+        axios.post('http://10.155.209.58:4000/snackbar/getusers').then(function(response){
             let teamMembers = [];
             response.data.users.forEach((user) => {
-                teamMembers.push(user.Name)
+                teamMembers.push({userID: user.UserID, name: user.Name});
             });
             self.setState({teamMembers});
         }).catch(function(error){
@@ -35,26 +35,26 @@ class Groups extends Component {
         });
     }
 
-    handleRemoveUser = (name) => {
-        let teamMembers = this.state.teamMembers;
-        for (let i = 0; i < teamMembers.length; i++) {
-            console.log(teamMembers[i]+"----"+name);
-            if(teamMembers[i] === name){
-                teamMembers.splice(i,1);
-            }
-        }
-        this.setState({
-            teamMembers,
-        });
+    handleRemoveUser = (name,id) => {
+        let self = this;
+        axios.post('http://10.155.209.58:4000/snackbar/deleteuser',{userId: id}).then(function(response){
+            window.location.reload();
+        }).catch(function(error){
+            //Some error occurred
+        })
+
+
     }
 
     addUserHandler = (user) => {
-        let teamMembers = this.state.teamMembers;
-        teamMembers.push(user);
-        this.setState({
-            teamMembers,
-        });
-        this.togglePrimary();
+        let self = this;
+        axios.post('http://10.155.209.58:4000/snackbar/adduser',user).then(function(response){
+            self.togglePrimary();
+            window.location.reload();
+        }).catch(function(error){
+            //Some error occurred
+        })
+
     }
 
     render() {
@@ -62,34 +62,48 @@ class Groups extends Component {
         const teamMembers = [];
         for (let i = 0; i < this.state.teamMembers.length; i++) {
                 teamMembers.push(
-                    <UserDetails name={this.state.teamMembers[i]} onUserRemove={this.handleRemoveUser} key={this.state.teamMembers[i]}/>
+                    <UserDetails
+                        name={this.state.teamMembers[i].name}
+                        onUserRemove={this.handleRemoveUser}
+                        key={this.state.teamMembers[i].userID}
+                        id={this.state.teamMembers[i].userID}
+                    />
                 );
         }
 
         return (
             <div>
-                <div><strong>Group</strong></div>
-                <Button color="primary" onClick={this.togglePrimary}>Add User</Button>
-                <Modal isOpen={this.state.addUser} toggle={this.togglePrimary} className={'modal-primary ' + this.props.className}>
-                    <ModalHeader toggle={this.togglePrimary}>Add User</ModalHeader>
-                    <ModalBody>
-                        <AddUserForm onAddUser={this.addUserHandler} onCancel={this.togglePrimary}/>
-                    </ModalBody>
-                </Modal>
 
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <colgroup>
-                        <col width="20%" />
-                        <col width="10%" />
-                    </colgroup>
-                    <tbody>{teamMembers}</tbody>
-                </table>
+                <div className="col-lg-8">
+                    <Button color="primary" onClick={this.togglePrimary}>Add User</Button>
+                    <Modal isOpen={this.state.addUser} toggle={this.togglePrimary} className={'modal-primary ' + this.props.className}>
+                        <ModalHeader toggle={this.togglePrimary}>Add User</ModalHeader>
+                        <ModalBody>
+                            <AddUserForm onAddUser={this.addUserHandler} onCancel={this.togglePrimary}/>
+                        </ModalBody>
+                    </Modal>
+                    <div className="row">
+                        &nbsp;
+                    </div>
+                    <div className="card">
+                        <div className="card-header">
+                            <i className="fa fa-align-justify"></i> Users
+                        </div>
+                        <div className="card-block">
+                            <table className="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>{teamMembers}</tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         )
     }

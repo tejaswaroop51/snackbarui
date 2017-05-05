@@ -23,11 +23,13 @@ import Register from './views/Pages/Register/'
 import Page404 from './views/Pages/Page404/'
 import Page500 from './views/Pages/Page500/'
 import Widgets from './views/Widgets/'
+import Orders from './views/Orders/Orders'
+import Payments from './views/Payments/Payments'
 
 export default (
   <Router history={hashHistory}>
     <Route path="/" name="Home" component={Full}>
-      <IndexRoute component={Dashboard}/>
+      <IndexRoute component={Groups}/>
       <Route path="dashboard" name="Dashboard" component={Dashboard}/>
       <Route path="components/" name="Components">
         <IndexRoute component={Buttons}/>
@@ -48,6 +50,9 @@ export default (
       <Route path="widgets" name="Widgets" component={Widgets}/>
       <Route path="charts" name="Charts" component={Charts}/>
       <Route path="groups" name="Groups" component={Groups}/>
+      <Route path="payments" name="Payments" component={Payments}/>
+      <Route path="orders" name="Orders" component={Orders}/>
+
     </Route>
     <Route path="pages/" name="Pages" component={Simple}>
       <IndexRoute component={Page404}/>
