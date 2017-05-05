@@ -10,11 +10,9 @@ class UserDetails extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.props = nextProps;
-        this.setState({ name: this.props.name });
+    componentWillMount = () => {
+        this.setState({name:this.props.name});
     }
-
     handleRemoveUser = () => {
         let name = this.state.name;
         this.props.onUserRemove(name);
@@ -22,8 +20,8 @@ class UserDetails extends Component {
 
     render() {
         return (
-            <tr>
-                <td><li>{this.state.name}</li></td>
+            <tr key={this.props.key}>
+                <td><li>{this.props.name}</li></td>
                 <td>
                     <i className="fa fa-close showHandCursor closeBtn" aria-hidden="true" onClick={this.handleRemoveUser} />
                 </td> </tr>

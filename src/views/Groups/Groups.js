@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import AddUserForm from "./AddUserForm";
 import UserDetails from "./UserDetails";
+import axios from 'axios';
 
 
 class Groups extends Component {
@@ -11,8 +12,21 @@ class Groups extends Component {
 
         this.state = {
             addUser: false,
-            teamMembers: ['Divya','Teja', 'Baqar', 'Thien', 'Lila'],
+            teamMembers: [],
         };
+    }
+
+    componentWillMount = () => {
+        let self = this;
+        axios.post('http://10.155.209.58:3000/snackbar/getusers').then(function(response){
+            let teamMembers = [];
+            response.data.users.forEach((user) => {
+                teamMembers.push(user.Name)
+            });
+            self.setState({teamMembers});
+        }).catch(function(error){
+            //Some error occurred
+        })
     }
 
     togglePrimary = () => {
@@ -44,11 +58,11 @@ class Groups extends Component {
     }
 
     render() {
+        console.log(this.state.teamMembers);
         const teamMembers = [];
         for (let i = 0; i < this.state.teamMembers.length; i++) {
                 teamMembers.push(
-                    <UserDetails name={this.state.teamMembers[i]} onUserRemove={this.handleRemoveUser}/>
-                    ,
+                    <UserDetails name={this.state.teamMembers[i]} onUserRemove={this.handleRemoveUser} key={this.state.teamMembers[i]}/>
                 );
         }
 
